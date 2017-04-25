@@ -11,6 +11,7 @@
 from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture, output_image
 from ClassifyNB import classify
+from sklearn.metrics import accuracy_score
 
 import numpy as np
 import pylab as pl
@@ -46,9 +47,16 @@ print labels_test
 clf = classify(features_train, labels_train)
 
 
-clf.predict(features_test)
+pred = clf.predict(features_test)
 
+    ### calculate and return the accuracy on the test data
+    ### this is slightly different than the example, 
+    ### where we just print the accuracy
+    ### you might need to import an sklearn module
+accuracy = accuracy_score(labels_test, pred)
 
+print("accuracy :")
+print(accuracy)
 
 ### draw the decision boundary with the text points overlaid
 prettyPicture(clf, features_test, labels_test)
