@@ -13369,23 +13369,16 @@ Testing set has 95 samples.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
-<p>I choose the following models.  The bulleted notes offer insights into the assumptions, strenghts, weakness and have been collected from varying sources online.</p>
-<p><strong>1. Logistic Regression </strong></p>
-<p><strong><em>what is logistic regression </em></strong></p>
-<p>Logistic regression is a classification algorithm that linearly divides the input space into two distinct regions, one for each binomial class. it explains the relationship between one dependent binary variable and one or more nominal, ordinal, interval or ratio-level independent variables. The fundamental condition is that the outcome variable is dichotomous and the predictors tend to a linear relationship.</p>
-<p><strong><em>Real life examples </em></strong></p>
-<ul>
+<h1 id="Answer:">Answer:<a class="anchor-link" href="#Answer:">&#182;</a></h1><p>I choose the following models.  The bulleted notes offer insights into the assumptions, strenghts, weakness and have been collected from varying sources online.</p>
+<h2 id="1.-Logistic-Regression">1. Logistic Regression<a class="anchor-link" href="#1.-Logistic-Regression">&#182;</a></h2><p>Logistic regression is a classification algorithm that linearly divides the input space into two distinct regions, one for each binomial class. it explains the relationship between one dependent binary variable and one or more nominal, ordinal, interval or ratio-level independent variables. The fundamental condition is that the outcome variable is dichotomous and the predictors tend to a linear relationship.</p>
+<h3 id="Real-life-examples">Real life examples<a class="anchor-link" href="#Real-life-examples">&#182;</a></h3><ul>
 <li>Industry usage (Penderson et. al 2014)
 Classification of protein sequences https://www.ncbi.nlm.nih.gov/pubmed/24465495
 Identify and automatically categorize protein sequences into one of 11 pre-defined classes
 [Tremendous potential for further bioinformatics applications using Logistic Regression]
 <li>How does the probability of getting lung cancer (yes vs. no) change for every additional pound of overweight and for every pack of cigarettes smoked per day?
 <li>Do body weight calorie intake, fat intake, and participant age have an influence on heart attacks (yes vs. no)?
-</ul>
-***Assumptions ***
-
-<ul>
+</ul><h3 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">&#182;</a></h3><ul>
 <li> Binary logistic regression requires the dependent variable to be binary (measured on a dichotomous scale).
 
 <li> You have one or more independent variables, which can be either continuous (i.e., an interval or ratio variable) or categorical (i.e., an ordinal or nominal variable).
@@ -13402,9 +13395,7 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 
 
 <li> It requires quite large sample sizes.  
-</ul>
-***Strengths ***
-<ul>
+</ul><h3 id="Strengths">Strengths<a class="anchor-link" href="#Strengths">&#182;</a></h3><ul>
 <li> It does not need a linear relationship between the dependent and independent variables.  Logistic regression can handle all sorts of relationships, because it applies a non-linear log transformation to the predicted odds ratio.  
 
 <li> The independent variables do not need to be multivariate normal – although multivariate normality yields a more stable solution.  Also the error terms (the residuals) do not need to be multivariate normally distributed.  
@@ -13414,9 +13405,7 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 <li> It can handle ordinal and nominal data as independent variables.  The independent variables do not need to be metric (interval or ratio scaled).
 
 <li> Many ways to regularize the model to tolerate some errors and avoid over-fitting
-</ul>
-***Weaknesses ***
-<ul>
+</ul><h3 id="Weaknesses">Weaknesses<a class="anchor-link" href="#Weaknesses">&#182;</a></h3><ul>
 <li> Performs poorly with high number of features or missing data. 
 
 <li> Irrelevant features will produce undesired effects. Outliers are a problem because it tries to maximize likelihood using all training data.
@@ -13427,9 +13416,7 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 
 <li> It does better with large datasets.
 
-</ul>
-***How does it fit this data ? ***
-<ul>
+</ul><h3 id="How-does-it-fit-this-data-?">How does it fit this data ?<a class="anchor-link" href="#How-does-it-fit-this-data-?">&#182;</a></h3><ul>
 <li>The problem requires a binary classification.
 
 <li>The data may or maynot have a linear relationship between the dependent and independent variables.
@@ -13437,11 +13424,9 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 <li>This is not highly intercorrelated data.
 
 <li>Average dataset size
-</ul><p><strong>2. Random Forest</strong></p>
-<p>Random forests or random decision forests  are an ensemble learning method for classification, regression and other tasks, that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees. 
+</ul><h2 id="2.-Random-Forest">2. Random Forest<a class="anchor-link" href="#2.-Random-Forest">&#182;</a></h2><p>Random forests or random decision forests  are an ensemble learning method for classification, regression and other tasks, that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees. 
 Random Forests are fast, flexible, and represent a robust approach to mining high-dimensional data. They are an extension of classification and regression trees (CART).</p>
-<p><strong><em>Real world application</em></strong></p>
-<ul>
+<h3 id="Real-world-application">Real world application<a class="anchor-link" href="#Real-world-application">&#182;</a></h3><ul>
 <li>Automatic recognition of loess landforms using Random Forest method
 https://link.springer.com/article/10.1007/s11629-016-4320-9
 
@@ -13452,9 +13437,7 @@ https://link.springer.com/chapter/10.1007%2F978-1-4419-9326-7_11
 
 <li>Modeling a System for Decision Support in Snow Avalanche Warning Using Balanced Random Forest and Weighted Random Forest
 https://link.springer.com/chapter/10.1007/978-3-319-10554-3_8
-</ul>
-***Assumptions***
-<ul>
+</ul><h3 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">&#182;</a></h3><ul>
 <li>At each step of building individual tree we find the best split of data
 <li>While building a tree we use not the whole dataset, but bootstrap sample
 <li>We aggregate the individual tree outputs by averaging (actually 2 and 3 means together more general bagging procedure).
@@ -13462,8 +13445,7 @@ https://link.springer.com/chapter/10.1007/978-3-319-10554-3_8
 <li>Reduce variance of noisy but unbiased trees by averaging
 <li> Maximize variance reduction by minimizing correlation between trees by means of bootstrapping data for each tree
 and sampling available variable-set at each node
-</ul><p><strong><em>Strenghts</em></strong></p>
-<ul>
+</ul><h3 id="Strenghts">Strenghts<a class="anchor-link" href="#Strenghts">&#182;</a></h3><ul>
 <li>It is one of the most accurate learning algorithms available. For many data sets, it produces a highly accurate classifier.
 <li>It runs efficiently on large databases. It is nonparametric, interpretable, efficient, and has high prediction accuracy for many types of data. 
 <li>It handles correlated/redundant variables
@@ -13476,40 +13458,33 @@ and sampling available variable-set at each node
 <li>It is very easy to handle – no distribution assumptions -> no transformation
 <li>Can easily handle qualitative (categorical) features
 <li>Out of bag (OOB) estimates can be used for model validation 
-</ul><p><strong><em>Weaknesses</em></strong></p>
-<ul>
+</ul><h3 id="Weaknesses">Weaknesses<a class="anchor-link" href="#Weaknesses">&#182;</a></h3><ul>
 <li>Unlike decision trees, the classifications made by random forests are difficult for humans to interpret.
 
 <li>For data including categorical variables with different number of levels, random forests are biased in favor of those attributes with more levels. Therefore, the variable importance scores from random forest are not reliable for this type of data. Methods such as partial permutations were used to solve the problem.
 
 <li>If the data contain groups of correlated features of similar relevance for the output, then smaller groups are favored over larger groups.
 
-</ul><p><strong><em>Applicability to the given data</em></strong></p>
-<ul>
+</ul><h3 id="Applicability-to-the-given-data">Applicability to the given data<a class="anchor-link" href="#Applicability-to-the-given-data">&#182;</a></h3><ul>
 
 <li>They perform well even in the presence of a large number of features and a small number of observations. 
 <li>It is nonparametric, interpretable, efficient, and has high prediction accuracy for many types of data including moderately correlated data.
-</ul><p><strong>3. SVM </strong>
-A Support Vector Machine (SVM) is a discriminative classifier formally defined by a separating hyperplane. In other words, given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples. It behaves like logistic regression in linear data spaces. Its nonlinear kernel is used when data is not linearly separable.</p>
-<p><strong><em>Real World Applications</em></strong>
-The support vector machine is a supervised learning technique for classification increasingly used in many applications of data mining, engineering, and bioinformatics; ; for instance, hand-written digit recognition, text categorization, and tumor classification with genomic profiles.</p>
+
+</ul><h2 id="3.-SVM">3. SVM<a class="anchor-link" href="#3.-SVM">&#182;</a></h2><p>A Support Vector Machine (SVM) is a discriminative classifier formally defined by a separating hyperplane. In other words, given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples. It behaves like logistic regression in linear data spaces. Its nonlinear kernel is used when data is not linearly separable.</p>
+<h3 id="Real-World-Applications">Real World Applications<a class="anchor-link" href="#Real-World-Applications">&#182;</a></h3><p>The support vector machine is a supervised learning technique for classification increasingly used in many applications of data mining, engineering, and bioinformatics; ; for instance, hand-written digit recognition, text categorization, and tumor classification with genomic profiles.</p>
 <ul>
 <li>Diagnosis of functional failures at the board level is critical for improving product yield and reducing manufacturing cost. https://link.springer.com/chapter/10.1007/978-3-319-40210-9_2
 <li>Learning to Classify Text Using Support Vector Machines https://link.springer.com/book/10.1007/978-1-4615-0907-3
-</ul><p><strong><em>Strengths</em></strong></p>
-<p><ul></p>
-<p><li>Avoids localization problems</p>
-<p><li>Can use the kernel trick</p>
-<p><li>Accurate with small and clean datasets</p>
-<p><li>Effecient since it only uses a subset of the data
-&lt;/ul&gt;
-<strong><em>Weaknesses</em></strong></p>
-<p><ul></p>
-<p><li>Sensitive to noise (may need to drop some features that are causing noise)</p>
-<p><li>Can be painful to train with large datasets
-&lt;/ul&gt;
-<strong><em>Reasons for Choosing</em></strong>
-SVMs can do well when with a small set as long as the number of data points is larger than the number of features being considered.</p>
+</ul><h3 id="Strengths">Strengths<a class="anchor-link" href="#Strengths">&#182;</a></h3><ul>
+<li>Avoids localization problems
+<li>Can use the kernel trick
+<li>Accurate with small and clean datasets
+<li>Effecient since it only uses a subset of the data
+</ul><h3 id="Weaknesses">Weaknesses<a class="anchor-link" href="#Weaknesses">&#182;</a></h3><ul>
+<li>Sensitive to noise (may need to drop some features that are causing noise)
+
+<li>Can be painful to train with large datasets
+</ul><h3 id="How-does-it-fit-the-data">How does it fit the data<a class="anchor-link" href="#How-does-it-fit-the-data">&#182;</a></h3><p>SVMs can do well when with a small set as long as the number of data points is larger than the number of features being considered.</p>
 
 </div>
 </div>

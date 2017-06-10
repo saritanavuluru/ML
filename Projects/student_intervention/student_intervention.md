@@ -320,17 +320,15 @@ In this section, you will choose 3 supervised learning models that are appropria
 - What are the weaknesses of the model; when does it perform poorly?
 - What makes this model a good candidate for the problem, given what you know about the data?
 
-**Answer: **
+# Answer: 
 
 I choose the following models.  The bulleted notes offer insights into the assumptions, strenghts, weakness and have been collected from varying sources online.
 
-**1. Logistic Regression **
-
-***what is logistic regression ***
+## 1. Logistic Regression 
 
 Logistic regression is a classification algorithm that linearly divides the input space into two distinct regions, one for each binomial class. it explains the relationship between one dependent binary variable and one or more nominal, ordinal, interval or ratio-level independent variables. The fundamental condition is that the outcome variable is dichotomous and the predictors tend to a linear relationship.
 
-***Real life examples ***
+### Real life examples 
 
 <ul>
 <li>Industry usage (Penderson et. al 2014)
@@ -340,7 +338,8 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 <li>How does the probability of getting lung cancer (yes vs. no) change for every additional pound of overweight and for every pack of cigarettes smoked per day?
 <li>Do body weight calorie intake, fat intake, and participant age have an influence on heart attacks (yes vs. no)?
 </ul>
-***Assumptions ***
+
+### Assumptions 
 
 <ul>
 <li> Binary logistic regression requires the dependent variable to be binary (measured on a dichotomous scale).
@@ -360,7 +359,9 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 
 <li> It requires quite large sample sizes.  
 </ul>
-***Strengths ***
+
+### Strengths 
+
 <ul>
 <li> It does not need a linear relationship between the dependent and independent variables.  Logistic regression can handle all sorts of relationships, because it applies a non-linear log transformation to the predicted odds ratio.  
 
@@ -372,7 +373,9 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 
 <li> Many ways to regularize the model to tolerate some errors and avoid over-fitting
 </ul>
-***Weaknesses ***
+
+### Weaknesses 
+
 <ul>
 <li> Performs poorly with high number of features or missing data. 
 
@@ -385,7 +388,9 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 <li> It does better with large datasets.
 
 </ul>
-***How does it fit this data ? ***
+
+### How does it fit this data ? 
+
 <ul>
 <li>The problem requires a binary classification.
 
@@ -396,13 +401,14 @@ Identify and automatically categorize protein sequences into one of 11 pre-defin
 <li>Average dataset size
 </ul>
 
-**2. Random Forest**
+## 2. Random Forest
 
 
 Random forests or random decision forests  are an ensemble learning method for classification, regression and other tasks, that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees. 
 Random Forests are fast, flexible, and represent a robust approach to mining high-dimensional data. They are an extension of classification and regression trees (CART). 
 
-***Real world application***
+### Real world application
+
 <ul>
 <li>Automatic recognition of loess landforms using Random Forest method
 https://link.springer.com/article/10.1007/s11629-016-4320-9
@@ -415,7 +421,9 @@ https://link.springer.com/chapter/10.1007%2F978-1-4419-9326-7_11
 <li>Modeling a System for Decision Support in Snow Avalanche Warning Using Balanced Random Forest and Weighted Random Forest
 https://link.springer.com/chapter/10.1007/978-3-319-10554-3_8
 </ul>
-***Assumptions***
+
+### Assumptions
+
 <ul>
 <li>At each step of building individual tree we find the best split of data
 <li>While building a tree we use not the whole dataset, but bootstrap sample
@@ -426,7 +434,8 @@ https://link.springer.com/chapter/10.1007/978-3-319-10554-3_8
 and sampling available variable-set at each node
 </ul>
 
-***Strenghts***
+### Strenghts
+
 <ul>
 <li>It is one of the most accurate learning algorithms available. For many data sets, it produces a highly accurate classifier.
 <li>It runs efficiently on large databases. It is nonparametric, interpretable, efficient, and has high prediction accuracy for many types of data. 
@@ -442,7 +451,8 @@ and sampling available variable-set at each node
 <li>Out of bag (OOB) estimates can be used for model validation 
 </ul>
 
-***Weaknesses***
+### Weaknesses
+
 <ul>
 <li>Unlike decision trees, the classifications made by random forests are difficult for humans to interpret.
 
@@ -452,37 +462,46 @@ and sampling available variable-set at each node
 
 </ul>
 
-***Applicability to the given data***
+### Applicability to the given data
+
 <ul>
 
 <li>They perform well even in the presence of a large number of features and a small number of observations. 
 <li>It is nonparametric, interpretable, efficient, and has high prediction accuracy for many types of data including moderately correlated data.
+
 </ul>
 
-**3. SVM **
+## 3. SVM 
+
 A Support Vector Machine (SVM) is a discriminative classifier formally defined by a separating hyperplane. In other words, given labeled training data (supervised learning), the algorithm outputs an optimal hyperplane which categorizes new examples. It behaves like logistic regression in linear data spaces. Its nonlinear kernel is used when data is not linearly separable.
 
-***Real World Applications***
+### Real World Applications
+
 The support vector machine is a supervised learning technique for classification increasingly used in many applications of data mining, engineering, and bioinformatics; ; for instance, hand-written digit recognition, text categorization, and tumor classification with genomic profiles.
 <ul>
 <li>Diagnosis of functional failures at the board level is critical for improving product yield and reducing manufacturing cost. https://link.springer.com/chapter/10.1007/978-3-319-40210-9_2
 <li>Learning to Classify Text Using Support Vector Machines https://link.springer.com/book/10.1007/978-1-4615-0907-3
 </ul>
 
-***Strengths***
+### Strengths
+
 <ul>
 <li>Avoids localization problems
 <li>Can use the kernel trick
 <li>Accurate with small and clean datasets
 <li>Effecient since it only uses a subset of the data
 </ul>
-***Weaknesses***
+
+### Weaknesses
+
 <ul>
 <li>Sensitive to noise (may need to drop some features that are causing noise)
 
 <li>Can be painful to train with large datasets
 </ul>
-***Reasons for Choosing***
+
+### How does it fit the data
+
 SVMs can do well when with a small set as long as the number of data points is larger than the number of features being considered.
 
 
