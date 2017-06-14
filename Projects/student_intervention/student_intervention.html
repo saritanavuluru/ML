@@ -11801,7 +11801,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries</span>
@@ -11911,14 +11911,14 @@ max     75.000000
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Calculate number of students</span>
 <span class="n">n_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate number of features</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#30 features, 1 target column</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
 <span class="n">n_passed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="n">student_data</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">])</span>
@@ -11948,7 +11948,7 @@ max     75.000000
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
-Number of features: 31
+Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
 Graduation rate of the class: 67.09%
@@ -11974,7 +11974,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -11990,11 +11990,11 @@ Graduation rate of the class: 67.09%
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xbb9a160&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc548438&gt;</pre>
 </div>
 
 </div>
@@ -13119,7 +13119,7 @@ AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -13201,7 +13201,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -13272,7 +13272,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -13312,14 +13312,6 @@ Feature values:
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training set has 300 samples.
 Testing set has 95 samples.
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Users\Sarita Navuluru\Anaconda2\lib\site-packages\sklearn\cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
 </pre>
 </div>
 </div>
@@ -13369,7 +13361,7 @@ Testing set has 95 samples.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Answer:">Answer:<a class="anchor-link" href="#Answer:">&#182;</a></h1><p>I choose the following models.  The bulleted notes offer insights into the assumptions, strenghts, weakness and have been collected from varying sources online.</p>
+<h1 id="Answer:">Answer:<a class="anchor-link" href="#Answer:">&#182;</a></h1><p>I choose the following models -</p>
 <h2 id="1.-Logistic-Regression">1. Logistic Regression<a class="anchor-link" href="#1.-Logistic-Regression">&#182;</a></h2><p>Logistic regression is a classification algorithm that linearly divides the input space into two distinct regions, one for each binomial class. it explains the relationship between one dependent binary variable and one or more nominal, ordinal, interval or ratio-level independent variables. The fundamental condition is that the outcome variable is dichotomous and the predictors tend to a linear relationship.</p>
 <h3 id="Real-life-examples">Real life examples<a class="anchor-link" href="#Real-life-examples">&#182;</a></h3><ul>
 <li>Industry usage (Penderson et. al 2014)
@@ -13509,7 +13501,7 @@ and sampling available variable-set at each node
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -13582,7 +13574,7 @@ and sampling available variable-set at each node
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -13599,12 +13591,14 @@ and sampling available variable-set at each node
 <span class="c1">#from sklearn import tree</span>
 
 
-<span class="c1">#my_random_state = None</span>
+<span class="n">my_random_state</span> <span class="o">=</span> <span class="mi">42</span>
 
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span> <span class="n">random_state</span><span class="o">=</span><span class="n">my_random_state</span><span class="p">)</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">my_random_state</span><span class="p">)</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">my_random_state</span><span class="p">)</span>
+
+
 
 <span class="c1">#Explore other options</span>
 <span class="c1">#clf_D = GaussianNB()</span>
@@ -13653,59 +13647,59 @@ and sampling available variable-set at each node
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a LogisticRegression using a training set size of 100. . .
-Trained model in 0.0160 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0090 seconds
+Made predictions in 0.0020 seconds.
 F1 score for training set: 0.8671.
 Made predictions in 0.0000 seconds.
 F1 score for test set: 0.7971.
 Training a LogisticRegression using a training set size of 200. . .
-Trained model in 0.0000 seconds
+Trained model in 0.0030 seconds
 Made predictions in 0.0000 seconds.
 F1 score for training set: 0.8333.
 Made predictions in 0.0000 seconds.
 F1 score for test set: 0.8030.
 Training a LogisticRegression using a training set size of 300. . .
-Trained model in 0.0000 seconds
+Trained model in 0.0030 seconds
 Made predictions in 0.0000 seconds.
 F1 score for training set: 0.8330.
 Made predictions in 0.0000 seconds.
 F1 score for test set: 0.8000.
 Training a SVC using a training set size of 100. . .
-Trained model in 0.0150 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0010 seconds.
 F1 score for training set: 0.8272.
-Made predictions in 0.0000 seconds.
+Made predictions in 0.0010 seconds.
 F1 score for test set: 0.8050.
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0000 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0040 seconds
+Made predictions in 0.0030 seconds.
 F1 score for training set: 0.8562.
-Made predictions in 0.0000 seconds.
+Made predictions in 0.0020 seconds.
 F1 score for test set: 0.7660.
 Training a SVC using a training set size of 300. . .
-Trained model in 0.0060 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0070 seconds
+Made predictions in 0.0050 seconds.
 F1 score for training set: 0.8621.
-Made predictions in 0.0000 seconds.
+Made predictions in 0.0020 seconds.
 F1 score for test set: 0.7972.
 Training a RandomForestClassifier using a training set size of 100. . .
-Trained model in 0.2680 seconds
-Made predictions in 0.0480 seconds.
-F1 score for training set: 1.0000.
-Made predictions in 0.0470 seconds.
-F1 score for test set: 0.8000.
+Trained model in 0.0320 seconds
+Made predictions in 0.0060 seconds.
+F1 score for training set: 0.9851.
+Made predictions in 0.0050 seconds.
+F1 score for test set: 0.6667.
 Training a RandomForestClassifier using a training set size of 200. . .
-Trained model in 0.2060 seconds
-Made predictions in 0.0470 seconds.
-F1 score for training set: 1.0000.
-Made predictions in 0.0470 seconds.
-F1 score for test set: 0.7883.
+Trained model in 0.1600 seconds
+Made predictions in 0.0060 seconds.
+F1 score for training set: 0.9885.
+Made predictions in 0.0110 seconds.
+F1 score for test set: 0.7121.
 Training a RandomForestClassifier using a training set size of 300. . .
-Trained model in 0.2450 seconds
-Made predictions in 0.0450 seconds.
-F1 score for training set: 1.0000.
-Made predictions in 0.0480 seconds.
-F1 score for test set: 0.7832.
+Trained model in 0.0260 seconds
+Made predictions in 0.0050 seconds.
+F1 score for training set: 0.9926.
+Made predictions in 0.0050 seconds.
+F1 score for test set: 0.7883.
 </pre>
 </div>
 </div>
@@ -13751,7 +13745,7 @@ F1 score for test set: 0.7832.
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0000</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8383</td>
+<td style="text-align:center">0.8333</td>
 <td style="text-align:center">0.8030</td>
 </tr>
 <tr>
@@ -13883,12 +13877,14 @@ F1 score for test set: 0.7832.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
-<p>The central premise of Logistic Regression is the assumption that the input space can be separated into two distinct ‘regions’, one for each class (pass/fail), by a linear(read: straight) boundary.  The algorithm's output is a probability that the given input point (a set of features pertaining to a student) belongs to a certain class. Thus, the output of Logistic Regression always lies in [0, 1].</p>
-<p>This study used logistic regression technique on the student data such as how much they go out with friends (feature:goout), or how often they have passed/failed a class before (feature:failures) amongst several other features to indicate whether she would pass or fail.</p>
-<p>The original dataset is split into training and testing sets. The existing data has the outcome(pass/fail) and so the model trains on the data.  Once trained, the model can be used to predict results on the testing data. Since we have the outcomes of the testing data as well, we compute the accuracy of its prediction by comparing the model result and the actual result on the test.</p>
-<p>Once the model accures a threshold accuracy, we could make predictions for a new student on whether she is likely to pass or fail the term given her features. An early intervention may be administered for a student slated to fail.</p>
-<p>There is no harm in flagging a student who is "likely to pass" as "likely to fail". But there may be big repercussions if we flag a student who is "likely to fail" as "likely to pass" and do not attend to the student. We could tune the strictness in the interpretation of the model to have more students 'likely to pass' falling under 'likely to fail'.</p>
+<h2 id="Answer:">Answer:<a class="anchor-link" href="#Answer:">&#182;</a></h2><p>The model fitting -</p>
+<ol>
+<li>split the dataset into a training set and testing set
+<li>fit the classifier on the training set
+<li>makes predictions on the test set
+</ol><h3 id="Logisitc-Regression">Logisitc Regression<a class="anchor-link" href="#Logisitc-Regression">&#182;</a></h3><p>Logistic Regression starts off by assigning each feature with a random/smartly guessed weight.  Then it will compute the estimated outcome value of the features given these weight estimates (by computing the dot product of features and weights). But the outcome needs to be in a binomial value like 0/1.  The above result is then fed to a sigmoid function which squashes the outcomes to the interval [0,1] (binomial classification).</p>
+<p>Given the accuracy of the outcome estimation over the iteration, it adjusts weights (by calculating the error) to recalculate the likelihood of the data.</p>
+<p>It will do this forever until we tell it to stop, which we usually do when the weight estimates do not change much (usually a change .01 or .001 is small enough to tell when to stop). We generally provide an epoch of iterations, e.g., 20 or 250. This usually indicates a problem in estimation.</p>
 
 </div>
 </div>
@@ -13929,7 +13925,7 @@ F1 score for test set: 0.7832.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -13938,12 +13934,14 @@ F1 score for test set: 0.7832.
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span><span class="p">,</span> <span class="n">make_scorer</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="n">my_random_state</span><span class="o">=</span><span class="bp">None</span>
+<span class="n">my_random_state</span><span class="o">=</span><span class="mi">42</span>
 
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
               <span class="s1">&#39;class_weight&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;balanced&#39;</span><span class="p">),</span>
-              <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">)}</span>
+              <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+              
+             <span class="p">}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">my_random_state</span><span class="p">)</span>
@@ -14000,7 +13998,7 @@ Tuned model has a testing F1 score of 0.8322.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
@@ -14011,11 +14009,13 @@ Tuned model has a testing F1 score of 0.8322.
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
 <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;max_features&#39;</span><span class="p">:[</span><span class="s1">&#39;log2&#39;</span><span class="p">,</span> <span class="s1">&#39;sqrt&#39;</span><span class="p">],</span> 
-    <span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    
+<span class="p">}</span>
 
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">my_random_state</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
@@ -14048,11 +14048,10 @@ Tuned model has a testing F1 score of 0.8322.
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0050 seconds.
-Tuned model has a training F1 score of 0.8326.
-Made predictions in 0.0050 seconds.
-Tuned model has a testing F1 score of 0.8105.
-ran
+<pre>Made predictions in 0.0000 seconds.
+Tuned model has a training F1 score of 0.8024.
+Made predictions in 0.0160 seconds.
+Tuned model has a testing F1 score of 0.8050.
 </pre>
 </div>
 </div>
@@ -14073,7 +14072,7 @@ ran
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.grid_search</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
@@ -14090,10 +14089,11 @@ ran
               <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
               <span class="s1">&#39;class_weight&#39;</span><span class="p">:(</span><span class="bp">None</span><span class="p">,</span><span class="s1">&#39;balanced&#39;</span><span class="p">),</span>
               <span class="s1">&#39;gamma&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+              
 <span class="p">}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="n">my_random_state</span><span class="p">)</span>
 
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
@@ -14124,9 +14124,9 @@ ran
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0060 seconds.
+<pre>Made predictions in 0.0080 seconds.
 Tuned model has a training F1 score of 0.9459.
-Made predictions in 0.0030 seconds.
+Made predictions in 0.0000 seconds.
 Tuned model has a testing F1 score of 0.8027.
 </pre>
 </div>

@@ -109,7 +109,7 @@ Let's begin by investigating the dataset to determine how many students we have 
 n_students = len(student_data)
 
 # TODO: Calculate number of features
-n_features = len(student_data.columns)
+n_features = len(student_data.columns)-1 #30 features, 1 target column
 
 # TODO: Calculate passing students
 n_passed = len(student_data[student_data["passed"] == "yes"])
@@ -129,7 +129,7 @@ print "Graduation rate of the class: {:.2f}%".format(grad_rate)
 ```
 
     Total number of students: 395
-    Number of features: 31
+    Number of features: 30
     Number of students who passed: 265
     Number of students who failed: 130
     Graduation rate of the class: 67.09%
@@ -154,7 +154,7 @@ student_data[student_data['passed'] == 'no']['health'].plot()
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0xbb9a160>
+    <matplotlib.axes._subplots.AxesSubplot at 0xc548438>
 
 
 
@@ -297,10 +297,6 @@ print "Testing set has {} samples.".format(X_test.shape[0])
     Testing set has 95 samples.
     
 
-    C:\Users\Sarita Navuluru\Anaconda2\lib\site-packages\sklearn\cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-      "This module will be removed in 0.20.", DeprecationWarning)
-    
-
 ## Training and Evaluating Models
 In this section, you will choose 3 supervised learning models that are appropriate for this problem and available in `scikit-learn`. You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. You will then fit the model to varying sizes of training data (100 data points, 200 data points, and 300 data points) and measure the F<sub>1</sub> score. You will need to produce three tables (one for each model) that shows the training set size, training time, prediction time, F<sub>1</sub> score on the training set, and F<sub>1</sub> score on the testing set.
 
@@ -322,7 +318,11 @@ In this section, you will choose 3 supervised learning models that are appropria
 
 # Answer: 
 
-I choose the following models.  The bulleted notes offer insights into the assumptions, strenghts, weakness and have been collected from varying sources online.
+
+
+I choose the following models -
+
+
 
 ## 1. Logistic Regression 
 
@@ -580,12 +580,14 @@ from sklearn.ensemble import RandomForestClassifier
 #from sklearn import tree
 
 
-#my_random_state = None
+my_random_state = 42
 
 # TODO: Initialize the three models
-clf_A = LogisticRegression()
-clf_B = SVC()
-clf_C = RandomForestClassifier(n_estimators = 100)
+clf_A = LogisticRegression( random_state=my_random_state)
+clf_B = SVC(random_state = my_random_state)
+clf_C = RandomForestClassifier(random_state = my_random_state)
+
+
 
 #Explore other options
 #clf_D = GaussianNB()
@@ -624,59 +626,59 @@ for clf in classifiers:
 ```
 
     Training a LogisticRegression using a training set size of 100. . .
-    Trained model in 0.0160 seconds
-    Made predictions in 0.0000 seconds.
+    Trained model in 0.0090 seconds
+    Made predictions in 0.0020 seconds.
     F1 score for training set: 0.8671.
     Made predictions in 0.0000 seconds.
     F1 score for test set: 0.7971.
     Training a LogisticRegression using a training set size of 200. . .
-    Trained model in 0.0000 seconds
+    Trained model in 0.0030 seconds
     Made predictions in 0.0000 seconds.
     F1 score for training set: 0.8333.
     Made predictions in 0.0000 seconds.
     F1 score for test set: 0.8030.
     Training a LogisticRegression using a training set size of 300. . .
-    Trained model in 0.0000 seconds
+    Trained model in 0.0030 seconds
     Made predictions in 0.0000 seconds.
     F1 score for training set: 0.8330.
     Made predictions in 0.0000 seconds.
     F1 score for test set: 0.8000.
     Training a SVC using a training set size of 100. . .
-    Trained model in 0.0150 seconds
-    Made predictions in 0.0000 seconds.
+    Trained model in 0.0020 seconds
+    Made predictions in 0.0010 seconds.
     F1 score for training set: 0.8272.
-    Made predictions in 0.0000 seconds.
+    Made predictions in 0.0010 seconds.
     F1 score for test set: 0.8050.
     Training a SVC using a training set size of 200. . .
-    Trained model in 0.0000 seconds
-    Made predictions in 0.0000 seconds.
+    Trained model in 0.0040 seconds
+    Made predictions in 0.0030 seconds.
     F1 score for training set: 0.8562.
-    Made predictions in 0.0000 seconds.
+    Made predictions in 0.0020 seconds.
     F1 score for test set: 0.7660.
     Training a SVC using a training set size of 300. . .
-    Trained model in 0.0060 seconds
-    Made predictions in 0.0000 seconds.
+    Trained model in 0.0070 seconds
+    Made predictions in 0.0050 seconds.
     F1 score for training set: 0.8621.
-    Made predictions in 0.0000 seconds.
+    Made predictions in 0.0020 seconds.
     F1 score for test set: 0.7972.
     Training a RandomForestClassifier using a training set size of 100. . .
-    Trained model in 0.2680 seconds
-    Made predictions in 0.0480 seconds.
-    F1 score for training set: 1.0000.
-    Made predictions in 0.0470 seconds.
-    F1 score for test set: 0.8000.
+    Trained model in 0.0320 seconds
+    Made predictions in 0.0060 seconds.
+    F1 score for training set: 0.9851.
+    Made predictions in 0.0050 seconds.
+    F1 score for test set: 0.6667.
     Training a RandomForestClassifier using a training set size of 200. . .
-    Trained model in 0.2060 seconds
-    Made predictions in 0.0470 seconds.
-    F1 score for training set: 1.0000.
-    Made predictions in 0.0470 seconds.
-    F1 score for test set: 0.7883.
+    Trained model in 0.1600 seconds
+    Made predictions in 0.0060 seconds.
+    F1 score for training set: 0.9885.
+    Made predictions in 0.0110 seconds.
+    F1 score for test set: 0.7121.
     Training a RandomForestClassifier using a training set size of 300. . .
-    Trained model in 0.2450 seconds
-    Made predictions in 0.0450 seconds.
-    F1 score for training set: 1.0000.
-    Made predictions in 0.0480 seconds.
-    F1 score for test set: 0.7832.
+    Trained model in 0.0260 seconds
+    Made predictions in 0.0050 seconds.
+    F1 score for training set: 0.9926.
+    Made predictions in 0.0050 seconds.
+    F1 score for test set: 0.7883.
     
 
 ### Tabular Results
@@ -687,7 +689,7 @@ Edit the cell below to see how a table can be designed in [Markdown](https://git
 | Training Set Size | Training Time | Prediction Time (test) | F1 Score (train) | F1 Score (test) |
 | :---------------: | :---------------------: | :--------------------: | :--------------: | :-------------: |
 | 100               |        0.0160           |        0.0000          |     0.8671       |   0.7971.       |                 
-| 200               |        0.0000           |        0.0000          |     0.8383       |   0.8030        |                 
+| 200               |        0.0000           |        0.0000          |     0.8333       |   0.8030        |                 
 | 300               |        0.0000           |        0.0000          |     0.8330       |   0.8000        |
 
 ** Classifer 2 - SVC **
@@ -724,19 +726,23 @@ SVC's performance can be ranked in between the above two.
 ### Question 4 - Model in Layman's Terms
 *In one to two paragraphs, explain to the board of directors in layman's terms how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.*
 
-**Answer: **
+## Answer: 
 
-The central premise of Logistic Regression is the assumption that the input space can be separated into two distinct ‘regions’, one for each class (pass/fail), by a linear(read: straight) boundary.  The algorithm's output is a probability that the given input point (a set of features pertaining to a student) belongs to a certain class. Thus, the output of Logistic Regression always lies in [0, 1].
+The model fitting -
+<ol>
+<li>split the dataset into a training set and testing set
+<li>fit the classifier on the training set
+<li>makes predictions on the test set
+</ol>
 
-This study used logistic regression technique on the student data such as how much they go out with friends (feature:goout), or how often they have passed/failed a class before (feature:failures) amongst several other features to indicate whether she would pass or fail. 
+### Logisitc Regression 
 
-The original dataset is split into training and testing sets. The existing data has the outcome(pass/fail) and so the model trains on the data.  Once trained, the model can be used to predict results on the testing data. Since we have the outcomes of the testing data as well, we compute the accuracy of its prediction by comparing the model result and the actual result on the test.
+Logistic Regression starts off by assigning each feature with a random/smartly guessed weight.  Then it will compute the estimated outcome value of the features given these weight estimates (by computing the dot product of features and weights). But the outcome needs to be in a binomial value like 0/1.  The above result is then fed to a sigmoid function which squashes the outcomes to the interval [0,1] (binomial classification). 
 
-Once the model accures a threshold accuracy, we could make predictions for a new student on whether she is likely to pass or fail the term given her features. An early intervention may be administered for a student slated to fail.
+Given the accuracy of the outcome estimation over the iteration, it adjusts weights (by calculating the error) to recalculate the likelihood of the data.
 
-There is no harm in flagging a student who is "likely to pass" as "likely to fail". But there may be big repercussions if we flag a student who is "likely to fail" as "likely to pass" and do not attend to the student. We could tune the strictness in the interpretation of the model to have more students 'likely to pass' falling under 'likely to fail'.
-
-
+It will do this forever until we tell it to stop, which we usually do when the weight estimates do not change much (usually a change .01 or .001 is small enough to tell when to stop). We generally provide an epoch of iterations, e.g., 20 or 250. This usually indicates a problem in estimation.
+ 
 
 ### Implementation: Model Tuning
 Fine tune the chosen model. Use grid search (`GridSearchCV`) with at least one important parameter tuned with at least 3 different values. You will need to use the entire training set for this. In the code cell below, you will need to implement the following:
@@ -761,12 +767,14 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.metrics import fbeta_score, make_scorer
 import numpy as np
 
-my_random_state=None
+my_random_state=42
 
 # TODO: Create the parameters list you wish to tune
 parameters = {'C': np.logspace(-4, 20, num=100),
               'class_weight': (None, 'balanced'),
-              'max_iter': (50, 200, 500)}
+              'max_iter': (50, 200, 500)
+              
+             }
 
 # TODO: Initialize the classifier
 clf = LogisticRegression(random_state=my_random_state)
@@ -809,11 +817,13 @@ import numpy as np
 # TODO: Create the parameters list you wish to tune
 parameters = {
     'max_features':['log2', 'sqrt'], 
-    'max_depth':[1,2,3]}
+    'max_depth':[1,2,3]
+    
+}
 
 
 # TODO: Initialize the classifier
-clf = RandomForestClassifier()
+clf = RandomForestClassifier(random_state=my_random_state)
 
 # TODO: Make an f1 scoring function using 'make_scorer' 
 f1_scorer = make_scorer(f1_score, pos_label='yes')
@@ -838,11 +848,10 @@ print "Tuned model has a testing F1 score of {:.4f}.".format(predict_labels(clf,
 
 ```
 
-    Made predictions in 0.0050 seconds.
-    Tuned model has a training F1 score of 0.8326.
-    Made predictions in 0.0050 seconds.
-    Tuned model has a testing F1 score of 0.8105.
-    ran
+    Made predictions in 0.0000 seconds.
+    Tuned model has a training F1 score of 0.8024.
+    Made predictions in 0.0160 seconds.
+    Tuned model has a testing F1 score of 0.8050.
     
 
 **Tuning the SVC Model**
@@ -864,10 +873,11 @@ parameters = {'kernel':('linear','rbf'),
               'C':np.arange(1,5,1), 
               'class_weight':(None,'balanced'),
               'gamma':np.logspace(-3,2,num=12)
+              
 }
 
 # TODO: Initialize the classifier
-clf = SVC()
+clf = SVC(random_state=my_random_state)
 
 
 # TODO: Make an f1 scoring function using 'make_scorer' 
@@ -888,9 +898,9 @@ print "Tuned model has a training F1 score of {:.4f}.".format(predict_labels(clf
 print "Tuned model has a testing F1 score of {:.4f}.".format(predict_labels(clf, X_test, y_test))
 ```
 
-    Made predictions in 0.0060 seconds.
+    Made predictions in 0.0080 seconds.
     Tuned model has a training F1 score of 0.9459.
-    Made predictions in 0.0030 seconds.
+    Made predictions in 0.0000 seconds.
     Tuned model has a testing F1 score of 0.8027.
     
 
