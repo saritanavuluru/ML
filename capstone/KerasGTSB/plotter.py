@@ -3,6 +3,7 @@ from keras.utils import np_utils
 import numpy as np
 from tqdm import tqdm
 import math
+import params
 
 
 def plot_image(image, nr, nc, i, label=""):

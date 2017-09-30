@@ -5,7 +5,7 @@ import seaborn as sns
 import collections
 import csv
 import os
-
+import params
 import keras
 from keras.utils import np_utils
 import random
@@ -16,6 +16,59 @@ import pickle
 from skimage import data, img_as_float, exposure, io
 from tqdm import tqdm
 from scipy import misc
+import loader
+
+# Load from Disk
+
+    
+
+def preprocess_aug_combine_save(X_train,y_train,X_test,y_test,X_val,y_val):
+
+    #Apply Transformations
+    
+    X_train, X_test,X_val= convert_to_grayscale(X_train, X_test,X_val)
+    
+    X_train_h, X_test_h, X_val_h = hist_equalize_set(X_train, X_test, X_val)
+    X_train_hae ,X_test_hae, X_val_hae = adaptive_equalize_set(X_train_h, X_test_h, X_val_h)
+    X_train_hcs,X_test_hcs,X_val_hcs = contrast_stretch_set(X_train_h,X_test_h,X_val_h)
+    ##X_train_n, X_test_n,X_val_n = preprocess.noralize(X_train, X_test,X_val)
+
+    #combine
+    X_hset,y_hset = combine_datasets([(X_train_h,y_train),(X_train_hae,y_train),(X_train_hcs,y_train)])
+    
+    #augment
+    X_aug_hset, y_aug_hset = data_augment(X_hset,y_hset,n_classes=params.n_classes,n_gen_per_class=params.n_generate,n_aug_per_class=params.n_select)
+
+    X_aug_classes, y_aug_classes = data_augment_classes(X_hset,y_hset,[7,11,15,18,22,30,35,42],n_gen_per_class=5000,n_aug_per_class=400)
+
+   
+    #save preprocessed data
+    loader.save_to_disk_6(X_train,y_train,X_test,y_test,X_val,y_val,False,"gray")
+    print(y_val)
+    loader.save_to_disk_6(X_train_h,y_train,X_test_h,y_test,X_val_h,y_val,False,"hist")
+    print(y_val)
+    loader.save_to_disk_6(X_train_hae,y_train,X_test_hae,y_test,X_val_hae,y_val,False,"hae")
+    loader.save_to_disk_6(X_train_hcs,y_train,X_test_hcs,y_test,X_val_hcs,y_val,False,"hcs")
+    loader.save_aug_all_to_disk(X_aug_hset,y_aug_hset,"hset_aug")
+    
+    
+    #combine
+    #X_aug_all,y_aug_all = combine_datasets([(X_all,y_all),(X_aug_all,y_aug_all),(X_aug_classes,y_aug_classes)])
+    X_train,y_train = combine_datasets([(X_aug_hset,y_aug_hset),(X_hset,y_hset),(X_aug_classes,y_aug_classes)])
+    
+    
+    #Use HAE for the test set and  the  validation set.
+    
+    X_train,y_train =shuffle( X_train,y_train,random_state=42)
+    X_val,y_val = shuffle(X_val_hae,y_val,random_state=42)
+    X_test,y_test = shuffle(X_test_hae,y_test,random_state=42)
+     
+    
+    #return
+    
+    return X_train,y_train,X_test,y_test,X_val,y_val
+
+    
 
 
 def conv_to_grayscale_img(img):
@@ -25,7 +78,7 @@ def conv_to_grayscale_img(img):
     #print(img.shape)
     return  img
 
-def conv_to_grayscale_data(data):
+def convert_to_grayscale_data(data):
     
     """Convert to grayscale, histogram equalize, and expand dims"""
     
@@ -85,6 +138,19 @@ def convert_to_grayscale(X_train,X_test, X_val):
     
     assert(X_train.shape[1:] == (32,32,1)), "The dimensions of the images are not 32 x 32 x 1."
     return X_train,X_test, X_val
+
+
+def conv_to_grayscale_data(data):
+
+    data_rgb = data
+    
+    data_gry = np.sum(data_rgb/3, 
+                     axis=3, keepdims=True)
+
+    
+    assert(data_gry.shape[1:] == (32,32,1)), "The dimensions of the images are not 32 x 32 x 1."
+    return data_gry
+
 
 def hist_equalize(dataset):
     hist_ds = []
@@ -232,4 +298,104 @@ def data_augment(X,y,n_classes,n_gen_per_class,n_aug_per_class):
     # Storing for checkpoint2
     #X_augmented = X_augmented.astype('float32')
 
+def combine_datasets(datasets):
+
+    x=datasets[0][0]
+    y = datasets[0][1]
+    count=0 
+    if type(x) is list:
+            x = np.asarray(x)
+            print(str(0)+' is a list')
+    if type(y) is list:
+            y = np.asarray(y)
+        
+    #print(x.shape)
+    #print(y.shape)
+    X_all=x
+    y_all=y
+    print('combining dataset '+str(0)+' of type '+str(type(x))+' and length '+str(len(x)))
+            
+    count = 0
+    for ds in datasets:
+        if count==0: #since we added the first one already
+            count+=1
+            continue
+       
+        #print(type(ds))
+        x = ds[0]
+        y=ds[1]
+        print('combining dataset '+str(count)+' of type '+str(type(x))+' and length '+str(len(x)))
+        if type(x) is list:
+            x = np.asarray(x)
+            print('Dataset '+str(count)+' is a list; converting to  ndarray')
+        if type(y) is list:
+            y = np.asarray(y)
+        
+        
+
+        X_all=np.append(X_all,x,axis=0)
+        y_all=np.append(y_all,y,axis=0)
+        count+=1
+
+
+   
+    assert(len(X_all) == len(y_all))
+    print('length of combined set : '+str(len(X_all)))
+    return np.asarray(X_all),np.asarray(y_all)
+
+
+def data_augment_classes(X,y,classes,n_gen_per_class,n_aug_per_class):
+
+    print('Generating '+str(n_gen_per_class)+' number of images per class, selecting '+str(n_aug_per_class)+' number of images per class for  augmentation')
+    print('No of classes:'+str(len(classes)))
+    print('classes:'+str(classes))
+    datagen = keras.preprocessing.image.ImageDataGenerator(
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    fill_mode='nearest',
+   # horizontal_flip=True,
+    )
+
     
+    img_shape = [X.shape[1], X.shape[2], X.shape[3]]
+    img_shape.insert(0,0)
+    
+    data_shape = np.asarray(img_shape)
+    total_image_per_class = n_gen_per_class
+    
+    X_augmented =np.empty(data_shape)
+    y_augmented =np.empty(0,dtype='uint8')
+    
+
+
+    print('Augmenting  Data...')
+    for i,classid in tqdm(enumerate(classes)):
+    #for i in tqdm(range(3)):
+            #print(i)
+            index = [y==classid]
+            images_for_classid = X[index]
+            y_classid = y[y==classid]
+            X_augmented_cid = np.empty(data_shape)
+            #print(X_augmented_i.shape)
+            y_augmented_cid = np.empty(0,dtype='uint8')
+            for X_b,y_b in datagen.flow(images_for_classid, y_classid, batch_size=len(y_classid), seed=9345+i*37):            
+                X_augmented_cid = np.append(X_augmented_cid, X_b, axis=0)
+                y_augmented_cid = np.append(y_augmented_cid, y_b, axis=0)
+
+                if len(X_augmented_cid) >= total_image_per_class:
+                    break
+            X_augmented_cid, y_augmented_cid = shuffle(X_augmented_cid, y_augmented_cid, random_state=9345)
+            X_augmented = np.append(X_augmented, X_augmented_cid[:n_aug_per_class], axis=0)
+            y_augmented = np.append(y_augmented, y_augmented_cid[:n_aug_per_class], axis=0)     
+    print("shufle")
+    X_augmented, y_augmented = shuffle(X_augmented, y_augmented, random_state=9345)
+    print("X_augmented shape: "+str(X_augmented.shape))
+    print("y_augmented shape: "+str(y_augmented.shape))
+    return X_augmented, y_augmented
+    
+    # Storing for checkpoint2
+    #X_augmented = X_augmented.astype('float32')
+ 
