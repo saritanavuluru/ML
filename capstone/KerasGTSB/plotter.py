@@ -44,6 +44,16 @@ def plot_images(img_class, images, ncol,desc):
         #print(i)
         plot_image(image.squeeze(), nrow, ncol, i+1)
         
+def plot_first_images(first_images):
+    
+    nr = 10 ; nc = 10
+    plt.figure(figsize=(nr,nc))
+    for image,i in zip(first_images, range(len(first_images))):
+        label = (str(i) + "\n"                                            # class
+              + '('+str(sign_names['NumTrain'][i])+')')                              # no. of training samples
+              
+        plot_image(image.squeeze(), nr, nc, i+1, label)
+    
 
 
 

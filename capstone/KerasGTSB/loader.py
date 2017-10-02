@@ -7,6 +7,9 @@ import pickle
 import os
 import params
 import preprocess
+import pandas as pd
+import collections
+import numpy as np
 
 
 
@@ -34,6 +37,45 @@ def load_data():
     assert(len(X_test) == len(y_test))
     
     return X_train, y_train, X_valid, y_valid, X_test, y_test
+
+
+def get_class_stats(y_train,y_test,y_valid):
+    # Read .csv file:
+    class_stats = pd.read_csv('signnames.csv')
+    #print(class_stats)
+    num_classes = len(class_stats)
+
+
+    assert (num_classes == params.n_classes), '1 or more class(es) not represented in training set'
+
+
+    # Count samples in each class, hash
+    df_val =  pd.DataFrame.from_dict(collections.Counter(y_valid), orient='index').reset_index()
+
+    df_test = pd.DataFrame.from_dict(collections.Counter(y_test), orient='index').reset_index()
+    #print(df_test)
+    df_train = pd.DataFrame.from_dict(collections.Counter(y_train), orient='index').reset_index()
+    df_train = df_train.rename(columns={'index':'ClassId', 0:'NumTrain'})
+    df_test = df_test.rename(columns={ 'index':'ClassId',0:'NumTest'})
+    df_val = df_val.rename(columns={ 'index':'ClassId',0:'NumValid'})
+
+    class_stats['NumTrain'] = df_train['NumTrain']
+    class_stats['NumTest'] = df_test['NumTest']
+    class_stats['NumValid'] = df_val['NumValid']
+
+    train_total = np.sum(class_stats['NumTrain'])
+    test_total = np.sum(class_stats['NumTest'])
+    val_total = np.sum(class_stats['NumValid'])
+    trainP=(class_stats['NumTrain'])/(train_total)*100
+    testP=(class_stats['NumTest'])/test_total*100
+    valP=(class_stats['NumValid'])/val_total*100
+
+    class_stats['PerTrain'] = trainP
+    class_stats['PerTest'] = testP
+    class_stats['PerVal'] = valP
+
+    return class_stats
+
 
 def load_combine_preprocessed(testop):
     X_aug_hset,y_aug_hset=  load_preprocessed_aug("./preprocessed/preprocessed_hset_aug_gray.p")   
@@ -195,7 +237,12 @@ def save_to_disk_6(X_train,y_train,X_test,y_test,X_val,y_val,flag_color,preop):
         print("File already exists: "+pickle_file)
         
 
-        
+
+
+
+
+
+     
 def save_aug_all_to_disk(X_aug_all,y_aug_all,op="aug_all"):
 
     assert(len(X_aug_all) == len(y_aug_all)), "The number of images is not equal to the number of labels."
