@@ -78,10 +78,17 @@ def get_class_stats(y_train,y_test,y_valid):
 
 
 def load_combine_preprocessed(testop):
-    X_aug_hset,y_aug_hset=  load_preprocessed_aug("./preprocessed/preprocessed_hset_aug_gray.p")   
-    X_train_h,y_train_h,X_test_h,y_test_h,X_val_h,y_val_h = load_preprocessed_data_6("./preprocessed/preprocessed_hist_gray.p")
-    X_train_hae,y_train_hae,X_test_hae,y_test_hae,X_val_hae,y_val_hae = load_preprocessed_data_6("./preprocessed/preprocessed_hae_gray.p")
-    X_train_hcs,y_train_hcs,X_test_hcs,y_test_hcs,X_val_hcs,y_val_hcs = load_preprocessed_data_6("./preprocessed/preprocessed_hcs_gray.p")
+    
+    hset_aug= os.path.join(params.preprocess_dir,'preprocessed_hset_aug_gray.p')
+    hist= os.path.join(params.preprocess_dir,'preprocessed_hist_gray.p')
+    hae= os.path.join(params.preprocess_dir,'preprocessed_hae_gray.p')
+    hcs= os.path.join(params.preprocess_dir,'preprocessed_hcs_gray.p')
+ 
+    print("Loading data ...")
+    X_aug_hset,y_aug_hset= load_preprocessed_aug(hset_aug)   
+    X_train_h,y_train_h,X_test_h,y_test_h,X_val_h,y_val_h = load_preprocessed_data_6(hist)
+    X_train_hae,y_train_hae,X_test_hae,y_test_hae,X_val_hae,y_val_hae = load_preprocessed_data_6(hae)
+    X_train_hcs,y_train_hcs,X_test_hcs,y_test_hcs,X_val_hcs,y_val_hcs = load_preprocessed_data_6(hcs)
 
     X_train,y_train = preprocess.combine_datasets([(X_aug_hset,y_aug_hset),(X_train_hae,y_train_hae),(X_train_h,y_train_h),(X_train_hcs,y_train_hcs)])
     
@@ -110,10 +117,13 @@ def load_combine_preprocessed(testop):
 
 def load_split_input_data() :
 
-    # TODO: fill this in based on where you saved the training and testing data
-    training_file = './data/train.p'
-    testing_file = './data/test.p'
-    validation_file = './data/valid.p'
+    training_file = os.path.join(params.data_dir,'train.p')
+    testing_file =  os.path.join(params.data_dir,'test.p')
+    validation_file = os.path.join(params.data_dir,'valid.p')
+    
+    #training_file = './data/train.p'
+    #testing_file = './data/test.p'
+    #validation_file = './data/valid.p'
 
 
     with open(training_file, mode='rb') as f:
@@ -163,8 +173,8 @@ def save_to_disk(X_train,y_train,X_test,y_test,X_val,y_val,X_aug,y_aug,flag_colo
     
     #print(label)
     
+    pickle_file = os.path.join(params.preprocess_dir,'preprocessed'+label+'.p')
     
-    pickle_file = 'preprocessed/preprocessed'+label+".p"
     #print("Saving  to "+pickle_file)
     print(pickle_file)
     if not os.path.isfile(pickle_file):
@@ -209,7 +219,7 @@ def save_to_disk_6(X_train,y_train,X_test,y_test,X_val,y_val,flag_color,preop):
     #print(label)
     
     
-    pickle_file = 'preprocessed/preprocessed'+label+".p"
+    pickle_file = params.preprocess_dir+"/"+label+".p"
     #print("Saving  to "+pickle_file)
     print(pickle_file)
     if not os.path.isfile(pickle_file):

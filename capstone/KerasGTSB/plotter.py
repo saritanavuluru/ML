@@ -66,7 +66,7 @@ def plot_2_datasets(dataset1, dataset2, label1, label2, count=0):
         nc = 2
         nr = count
         
-        #plt.figure(figsize=(nr,nc))
+        plt.figure(figsize=(10,10))
         for i in range(count):
         
             plot_image(dataset1[i].squeeze(), nr, nc, 2*i+1,label1)
@@ -99,6 +99,47 @@ def get_dark_bright_imgs(imgs,mean,std):
             bright_mean.append(img_mean)
 
     return dark,bright,dark_mean,bright_mean
+
+
+def plot_top_n_preds(X_test_new,prob_new,sign_names,top_n):
+
+    topn_preds = (np.argsort(-prob_new))[:,:top_n]
+    topn_pred_names = sign_names[topn_preds]
+    #print(prob_new.shape)
+    for i in range(topn_preds.shape[0]):
+        #plotter.plot_image(X_test_new[i].squeeze(),x.shape[0],2,2*(i)+1,"")
+        indices = topn_preds[i,:]
+        topn_probs = prob_new[i,[indices]][0]
+        #print(top5_probs)
+        names = topn_pred_names[i,:]
+        #print(names)
+        implot = plt.figure(figsize=(10,4))
+
+        ax = implot.add_subplot(1,2,1)
+        ax.grid(False)
+        ax.axis('off')
+        ax.imshow(X_test_new[i].squeeze(),cmap='gray')
+
+
+        y_pos = np.arange(len(names))
+        y_pos=y_pos[::-1]
+        
+
+        ax2 = implot.add_subplot(1,2,2)
+        #print(top5_probs)
+        ax2.barh(y_pos, topn_probs, align='center', color="purple")
+        ax2.set_yticks(y_pos)
+        ax2.set_yticklabels(names)
+        #print(names)
+        ax2.yaxis.set_ticks_position('right')
+        ax2.set_xlabel('Top '+str(top_n)+' Probabilities')
+        ax2.set_title('Classes')
+        ax2.set_xlim([0, 1])
+
+        plt.tight_layout()
+
+        plt.show()
+
 
 def plot_equalize_color_gray(img_dark,img_dark_equal, img_dark_equal_gry, img_bright,img_bright_equal, img_bright_equal_gry,op):
     plot_image(img_dark, 2,4,1, "Original Dark")

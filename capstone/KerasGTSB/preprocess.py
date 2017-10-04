@@ -24,41 +24,47 @@ import loader
 
 def preprocess_aug_combine_save(X_train,y_train,X_test,y_test,X_val,y_val):
 
+    if os.path.exists(params.preprocess_dir)==False:
+        print("The directory "+params.preprocess_dir+ "doesn't exist")
+        return
     #Apply Transformations
-    
+    print("Converting to Grayscale")
     X_train, X_test,X_val= convert_to_grayscale(X_train, X_test,X_val)
-    
+    printing("Applying Transformations")
     X_train_h, X_test_h, X_val_h = hist_equalize_set(X_train, X_test, X_val)
     X_train_hae ,X_test_hae, X_val_hae = adaptive_equalize_set(X_train_h, X_test_h, X_val_h)
     X_train_hcs,X_test_hcs,X_val_hcs = contrast_stretch_set(X_train_h,X_test_h,X_val_h)
     ##X_train_n, X_test_n,X_val_n = preprocess.noralize(X_train, X_test,X_val)
 
+    print ("Combine the transformed datasets")
     #combine
     X_hset,y_hset = combine_datasets([(X_train_h,y_train),(X_train_hae,y_train),(X_train_hcs,y_train)])
-    
+    print("Augment data")
     #augment
     X_aug_hset, y_aug_hset = data_augment(X_hset,y_hset,n_classes=params.n_classes,n_gen_per_class=params.n_generate,n_aug_per_class=params.n_select)
 
-    X_aug_classes, y_aug_classes = data_augment_classes(X_hset,y_hset,[7,11,15,18,22,30,35,42],n_gen_per_class=5000,n_aug_per_class=400)
+    #X_aug_classes, y_aug_classes = data_augment_classes(X_hset,y_hset,[7,11,15,18,22,30,35,42],n_gen_per_class=5000,n_aug_per_class=400)
 
    
     #save preprocessed data
-    loader.save_to_disk_6(X_train,y_train,X_test,y_test,X_val,y_val,False,"gray")
-    print(y_val)
-    loader.save_to_disk_6(X_train_h,y_train,X_test_h,y_test,X_val_h,y_val,False,"hist")
-    print(y_val)
-    loader.save_to_disk_6(X_train_hae,y_train,X_test_hae,y_test,X_val_hae,y_val,False,"hae")
-    loader.save_to_disk_6(X_train_hcs,y_train,X_test_hcs,y_test,X_val_hcs,y_val,False,"hcs")
-    loader.save_aug_all_to_disk(X_aug_hset,y_aug_hset,"hset_aug")
-    
-    
+    print("Saving data")
+    try:
+        loader.save_to_disk_6(X_train,y_train,X_test,y_test,X_val,y_val,False,"gray")
+        print(y_val)
+        loader.save_to_disk_6(X_train_h,y_train,X_test_h,y_test,X_val_h,y_val,False,"hist")
+        print(y_val)
+        loader.save_to_disk_6(X_train_hae,y_train,X_test_hae,y_test,X_val_hae,y_val,False,"hae")
+        loader.save_to_disk_6(X_train_hcs,y_train,X_test_hcs,y_test,X_val_hcs,y_val,False,"hcs")
+        loader.save_aug_all_to_disk(X_aug_hset,y_aug_hset,"hset_aug")
+        
+    except (OSError, IOError) as e:
+        print("Couldn't save, proceeding to combine :"+str(e))
     #combine
-    #X_aug_all,y_aug_all = combine_datasets([(X_all,y_all),(X_aug_all,y_aug_all),(X_aug_classes,y_aug_classes)])
     X_train,y_train = combine_datasets([(X_aug_hset,y_aug_hset),(X_hset,y_hset),(X_aug_classes,y_aug_classes)])
     
     
     #Use HAE for the test set and  the  validation set.
-    
+    print("Shuffle")
     X_train,y_train =shuffle( X_train,y_train,random_state=42)
     X_val,y_val = shuffle(X_val_hae,y_val,random_state=42)
     X_test,y_test = shuffle(X_test_hae,y_test,random_state=42)
