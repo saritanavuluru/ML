@@ -4,7 +4,7 @@ import numpy as np
 from tqdm import tqdm
 import math
 import params
-
+from math import sqrt
 
 def plot_image(image, nr, nc, i, label=""):
     """
@@ -139,6 +139,43 @@ def plot_top_n_preds(X_test_new,prob_new,sign_names,top_n):
         plt.tight_layout()
 
         plt.show()
+        
+# modified from original Function by gcalmettes from http://stackoverflow.com/questions/11159436/multiple-figures-in-a-single-window
+def plot_figures(figures, dims):
+    """Plot a dictionary of figures.
+
+    Parameters
+    ----------
+    figures : <title, figure> dictionary
+    ncols : number of columns of subplots wanted in the display
+    nrows : number of rows of subplots wanted in the figure
+    """
+    ncols = dims[0]
+    nrows = dims[1]
+    fig, axeslist = plt.subplots(ncols=ncols, nrows=nrows)
+    for ind,figure in enumerate(figures):
+        #print(ind)
+        axeslist.ravel()[ind].imshow(figure, cmap=plt.gray())
+       
+
+    for ind in range(nrows*ncols):
+        axeslist.ravel()[ind].set_axis_off()
+
+    
+    plt.show()
+
+
+def get_dim(num):
+    """
+    Simple function to get the dimensions of a square-ish shape for plotting
+    num images
+    """
+
+    s = sqrt(num)
+    if round(s) < s:
+        return (int(s), int(s)+1)
+    else:
+        return (int(s)+1, int(s)+1)
 
 
 def plot_equalize_color_gray(img_dark,img_dark_equal, img_dark_equal_gry, img_bright,img_bright_equal, img_bright_equal_gry,op):
