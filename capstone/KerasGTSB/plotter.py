@@ -5,6 +5,8 @@ from tqdm import tqdm
 import math
 import params
 from math import sqrt
+import seaborn as sns
+
 
 def plot_image(image, nr, nc, i, label=""):
     """
@@ -139,7 +141,29 @@ def plot_top_n_preds(X_test_new,prob_new,sign_names,top_n):
         plt.tight_layout()
 
         plt.show()
-        
+def plot_train_loss_accuracy(model_history):
+    sns.set_style("whitegrid")
+    #sns.set_context("poster")
+    
+
+    fig, (ax0,ax1) = plt.subplots(ncols=2,nrows=1,figsize=(20, 5), sharey=False)
+    
+
+    ax0.plot(model_history['acc'], 'r')  
+    ax0.plot(model_history['val_acc'],'g')  
+    ax0.set_title('Model (Train vs Validation) Accuracy')  
+    ax0.set_ylabel('Accuracy',fontsize=14,fontweight='bold')  
+    ax0.set_xlabel('Epoch',fontsize=14,fontweight='bold')  
+    ax0.legend(['train', 'validation'], loc='lower right', fontsize=14)  
+    
+
+    ax1.plot(model_history['loss'],'r')  
+    ax1.plot(model_history['val_loss'],'g')  
+    ax1.set_title('Model (Train vs Validation) Loss')  
+    ax1.set_ylabel('Loss',fontsize=14,fontweight='bold')  
+    ax1.set_xlabel('Epoch',fontsize=14,fontweight='bold')  
+    ax1.legend(['train', 'validation'], loc='upper right',fontsize=14)  
+       
 # modified from original Function by gcalmettes from http://stackoverflow.com/questions/11159436/multiple-figures-in-a-single-window
 def plot_figures(figures, dims):
     """Plot a dictionary of figures.
@@ -177,7 +201,30 @@ def get_dim(num):
     else:
         return (int(s)+1, int(s)+1)
 
+def compare_train_loss_accuracy(history1, history2,model_name1, model_name2):
+    sns.set_style("whitegrid")
+    sns.set_context("poster")
+    
+    fig, (ax0,ax1) = plt.subplots(ncols=2,nrows=1,figsize=(20, 5), sharey=False)
+    
 
+    ax0.plot(history1['acc'], 'r')  
+    ax0.plot(history2['acc'],'b')  
+    ax0.set_title('Compare Accuracy')  
+    ax0.set_ylabel('Accuracy',fontsize=14,fontweight='bold')  
+    ax0.set_xlabel('Epoch',fontsize=14,fontweight='bold')  
+    ax0.legend([model_name1, model_name2 ], loc='lower right', fontsize=14)  
+    
+     # summarize history for loss  
+
+    ax1.plot(history1['loss'],'r')  
+    ax1.plot(history2['loss'],'b')  
+    ax1.set_title('Compare Loss')  
+    ax1.set_ylabel('Loss',fontsize=14,fontweight='bold')  
+    ax1.set_xlabel('Epoch',fontsize=14,fontweight='bold')  
+    ax1.legend([model_name1, model_name2 ], loc='upper right',fontsize=14)  
+
+    
 def plot_equalize_color_gray(img_dark,img_dark_equal, img_dark_equal_gry, img_bright,img_bright_equal, img_bright_equal_gry,op):
     plot_image(img_dark, 2,4,1, "Original Dark")
     plot_image(img_dark_equal, 2,4,2,op+" Dark")
